@@ -1,4 +1,5 @@
-#include <stdio.h>
+
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <conio.h>
@@ -225,7 +226,54 @@ void displayClock()
     printf("Current Time: %s\n", timeString);
 }
 
-int main(){
+void initializeDefaults()
+{
+    strcpy(books[bookCount].title, "The Great Gatsby");
+    books[bookCount].available = 1;
+    strcpy(books[bookCount].borrowedBy, "None");
+    strcpy(books[bookCount].dueDate, "N/A");
+    bookCount++;
+
+    strcpy(books[bookCount].title, "1984");
+    books[bookCount].available = 0;
+    strcpy(books[bookCount].borrowedBy, "user1");
+    strcpy(books[bookCount].dueDate, "2025-03-23");
+    bookCount++;
+
+    strcpy(books[bookCount].title, "To Kill a Mockingbird");
+    books[bookCount].available = 1;
+    strcpy(books[bookCount].borrowedBy, "None");
+    strcpy(books[bookCount].dueDate, "N/A");
+    bookCount++;
+
+    strcpy(users[userCount].username, "admin");
+    strcpy(users[userCount].password, "admin123");
+    users[userCount].isAdmin = 1;
+    users[userCount].isLocked = 0;
+    getCurrentDatePlusOneMonth(users[userCount].licenseExpiry);
+    userCount++;
+
+    strcpy(users[userCount].username, "user1");
+    strcpy(users[userCount].password, "password1");
+    users[userCount].isAdmin = 0;
+    users[userCount].isLocked = 0;
+    getCurrentDatePlusOneMonth(users[userCount].licenseExpiry);
+    userCount++;
+
+    strcpy(users[userCount].username, "user2");
+    strcpy(users[userCount].password, "password2");
+    users[userCount].isAdmin = 0;
+    users[userCount].isLocked = 0;
+    getCurrentDatePlusOneMonth(users[userCount].licenseExpiry);
+    userCount++;
+
+    strcpy(requests[requestCount].title, "The Catcher in the Rye");
+    strcpy(requests[requestCount].requestedBy, "user2");
+    requestCount++;
+}
+
+int main()
+{
     int choice;
     char username[50];
     char password[50];
@@ -233,6 +281,7 @@ int main(){
     int isAdmin = 0;
     int attempts = 0;
 
+    initializeDefaults();
 
     printf("\n\n");
     displayWelcomePage();
